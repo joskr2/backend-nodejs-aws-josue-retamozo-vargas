@@ -22,7 +22,6 @@ backend-nodejs-aws/
 │   ├── handlers/           # Controladores de endpoints
 │   ├── services/           # Servicios para integración con APIs y base de datos
 │   ├── utils/              # Respuestas HTTP y utilidades
-│   └── index.ts            # Punto de entrada principal
 │
 ├── tests/                  # Pruebas unitarias
 ├── serverless.ts           # Configuración de Serverless Framework
@@ -82,19 +81,3 @@ El proyecto utiliza Jest para pruebas unitarias. Las pruebas se encuentran en la
 
 Josue Retamozo Vargas  
 Backend Developer
-
----
-
-## 📋 Pasos Finales
-
-1. **Ubicación**:
-  - Guarda el `index.ts` en la carpeta **`src/`**.
-  - Guarda el `README.md` en la raíz del proyecto.
-
-2. **Prueba el Proyecto**:
-  ```bash
-  npm run start
-  ```
-
-3. **Verifica Localmente**:
-  Abre [http://localhost:3000/](http://localhost:3000/) o utiliza herramientas como Postman.
