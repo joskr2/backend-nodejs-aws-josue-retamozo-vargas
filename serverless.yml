@@ -4,7 +4,7 @@ frameworkVersion: '4'
 provider:
   name: aws
   runtime: nodejs20.x
-  region: us-east-1
+  region: sa-east-1
   environment:
     CACHE_TTL: '1800'
     TABLE_NAME: FusionedData
