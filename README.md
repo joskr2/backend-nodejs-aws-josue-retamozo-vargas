@@ -40,26 +40,6 @@ backend-nodejs-aws/
   cd backend-nodejs-aws
   ```
 
-2. Instala las dependencias:
-  ```bash
-  npm install
-  ```
-
-3. Ejecuta localmente:
-  ```bash
-  npm run start
-  ```
-
-4. Pruebas:
-  ```bash
-  npm run test
-  ```
-
-5. Despliegue en AWS:
-  ```bash
-  npm run deploy
-  ```
-
 ---
 
 ## ⚙️ Endpoints
