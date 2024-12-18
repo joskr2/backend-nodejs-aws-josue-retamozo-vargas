@@ -1,14 +1,25 @@
 import axios from "axios";
 
-export class WeatherService {
-  static async getWeather(location: string) {
-    const apiKey = "d29c45885ac14356e4df5717360c7d3f";// demo key from openweathermap
+const getWeather = async (location: string) => {
+  const apiKey = process.env.OPENWEATHER_API_KEY;
+  if (!apiKey) {
+    throw new Error(
+      "OpenWeather API key is not defined in environment variables"
+    );
+  }
+
+  try {
     const { data } = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`
     );
     return {
-      temperature: data.main.temp,
-      weather: data.weather[0].description,
+      temperature: data?.main?.temp,
+      weather: data?.weather[0]?.description,
     };
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    throw new Error("Failed to fetch weather data");
   }
-}
+};
+
+export { getWeather };

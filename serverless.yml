@@ -1,0 +1,45 @@
+service: backend-nodejs-aws
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  environment:
+    CACHE_TTL: '1800'
+    TABLE_NAME: FusionedData
+    OPENWEATHER_API_KEY: ${env:OPENWEATHER_API_KEY}
+
+functions:
+  fusion:
+    handler: src/handlers/fusionHandler.getFusioned
+    events:
+      - http:
+          path: fusionados
+          method: get
+  store:
+    handler: src/handlers/storeHandler.postData
+    events:
+      - http:
+          path: almacenar
+          method: post
+  history:
+    handler: src/handlers/historyHandler.getHistory
+    events:
+      - http:
+          path: historial
+          method: get
+
+resources:
+  Resources:
+    FusionedDataTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: FusionedData
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

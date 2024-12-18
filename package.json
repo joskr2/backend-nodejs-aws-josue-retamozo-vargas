@@ -1,25 +1,4 @@
 {
-  "name": "backend-nodejs-aws",
-  "version": "1.0.0",
-  "description": "API RESTful desplegada en AWS Lambda con Serverless Framework y TypeScript.",
-  "main": "index.js",
-  "scripts": {
-    "start": "serverless offline",
-    "deploy": "serverless deploy",
-    "test": "jest --coverage",
-    "build": "tsc"
-  },
-  "directories": {
-    "test": "tests"
-  },
-  "keywords": [
-    "Node.js",
-    "AWS",
-    "Serverless",
-    "TypeScript"
-  ],
-  "author": "Tu Nombre",
-  "license": "MIT",
   "dependencies": {
     "@serverless/typescript": "^3.38.0",
     "aws-sdk": "^2.1692.0",

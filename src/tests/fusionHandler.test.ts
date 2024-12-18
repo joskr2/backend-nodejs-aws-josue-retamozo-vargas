@@ -14,23 +14,22 @@ describe("GET /fusionados", () => {
     expect(result.statusCode).toBe(200);
     const body = JSON.parse(result.body);
 
-    expect(body).toHaveProperty("name");
-    expect(body).toHaveProperty("temperature");
+    expect(body).toHaveProperty("name", "Luke Skywalker");
+    expect(body).toHaveProperty("temperature", "25°C");
   });
 
   test("Debe manejar errores correctamente", async () => {
-    jest.spyOn(console, "error").mockImplementation(() => {});
-    const faultyHandler = async () => {
-      throw new Error("Error simulado");
-    };
+    jest.spyOn(console, "error").mockImplementation(() => {
+      throw new Error("Simulated error");
+    });
 
-    const result = await faultyHandler().catch((error) => ({
-      statusCode: 500,
-      body: JSON.stringify({ message: error.message }),
-    }));
+    const result = (await getFusioned(
+      mockEvent as APIGatewayEvent,
+      mockContext as Context
+    )) as APIGatewayProxyResult;
 
     expect(result.statusCode).toBe(500);
     const body = JSON.parse(result.body);
-    expect(body.message).toBe("Error simulado");
+    expect(body.message).toBe("Error interno del servidor");
   });
 });
