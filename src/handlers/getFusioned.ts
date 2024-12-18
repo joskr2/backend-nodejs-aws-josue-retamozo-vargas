@@ -10,9 +10,10 @@ export const getFusioned = async (
     const weatherData = await getWeather("Arequipa");
     const peopleData = await getPeople();
 
+    const weatherDataToCelcius = weatherData?.temperature - 273.15;
     const data = {
       name: peopleData.name,
-      temperature: `${weatherData?.temperature - 273.15 || 0}°C`,
+      temperature: `${weatherDataToCelcius.toFixed(2) || 0}°C`,
     };
 
     return {
