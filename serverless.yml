@@ -12,7 +12,7 @@ provider:
 
 functions:
   fusion:
-    handler: src/handlers/fusionHandler.getFusioned
+    handler: src/handlers/getFusioned.getFusioned
     events:
       - http:
           path: fusionados

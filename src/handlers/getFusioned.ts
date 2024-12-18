@@ -1,13 +1,18 @@
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from "aws-lambda";
+import { getWeather } from "../services/weatherService";
+import { getPeople } from "../services/swapiService";
 
 export const getFusioned = async (
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> => {
   try {
+    const weatherData = await getWeather("Arequipa");
+    const peopleData = await getPeople();
+
     const data = {
-      name: "Luke Skywalker",
-      temperature: "25°C",
+      name: peopleData.name,
+      temperature: `${weatherData.temperature}°C`,
     };
 
     return {
@@ -22,3 +27,5 @@ export const getFusioned = async (
     };
   }
 };
+
+module.exports = { getFusioned };
