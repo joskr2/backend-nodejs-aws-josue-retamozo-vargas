@@ -29,11 +29,14 @@ export const getHistory: APIGatewayProxyHandler = async (event) => {
 
   try {
     const result = await db.scan(params).promise();
+    console.log("History data fetched successfully");
     return {
       statusCode: 200,
       body: JSON.stringify({
         items: result.Items,
-        lastEvaluatedKey: result.LastEvaluatedKey,
+        lastEvaluatedKey: result.LastEvaluatedKey
+          ? JSON.stringify(result.LastEvaluatedKey)
+          : null,
       }),
     };
   } catch (error) {
