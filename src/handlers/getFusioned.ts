@@ -12,7 +12,7 @@ export const getFusioned = async (
 
     const data = {
       name: peopleData.name,
-      temperature: `${weatherData.temperature}°C`,
+      temperature: `${weatherData?.temperature - 273.15 || 0}°C`,
     };
 
     return {
