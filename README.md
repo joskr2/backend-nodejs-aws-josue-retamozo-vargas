@@ -65,12 +65,11 @@ backend-nodejs-aws/
 
 ## ⚙️ Endpoints
 
-| Método | Ruta        | Descripción                              |
-|--------|-------------|------------------------------------------|
-| GET    | /fusionados | Retorna datos combinados de dos APIs.    |
-| POST   | /almacenar  | Almacena datos personalizados.           |
-| GET    | /historial  | Retorna el historial almacenado.         |
-
+| Método | Ruta                                                                 | Descripción                              |
+|--------|----------------------------------------------------------------------|------------------------------------------|
+| GET    | [https://wyizfkwej4.execute-api.sa-east-1.amazonaws.com/dev/fusionados](https://wyizfkwej4.execute-api.sa-east-1.amazonaws.com/dev/fusionados) | Retorna datos combinados de dos APIs.    |
+| POST   | [https://wyizfkwej4.execute-api.sa-east-1.amazonaws.com/dev/almacenar](https://wyizfkwej4.execute-api.sa-east-1.amazonaws.com/dev/almacenar)   | Almacena datos personalizados.           |
+| GET    | [https://wyizfkwej4.execute-api.sa-east-1.amazonaws.com/dev/historial](https://wyizfkwej4.execute-api.sa-east-1.amazonaws.com/dev/historial)   | Retorna el historial almacenado.         |
 ---
 
 ## 🧪 Pruebas
