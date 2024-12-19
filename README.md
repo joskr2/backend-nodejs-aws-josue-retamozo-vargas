@@ -19,14 +19,31 @@ Este proyecto implementa una API RESTful desplegada en **AWS Lambda** utilizando
 ```plaintext
 backend-nodejs-aws/
 ├── src/
-│   ├── handlers/           # Controladores de endpoints
+│   ├── controllers/        # Controladores de endpoints
+│   │   ├── fusionController.ts
+│   │   ├── historyController.ts
+│   │   ├── storeController.ts
+│   ├── models/             # Modelos de datos
+│   ├── repositories/       # Repositorios para acceso a datos
+│   │   ├── fusionRepository.ts
+│   │   ├── historyRepository.ts
+│   │   ├── storeRepository.ts
 │   ├── services/           # Servicios para integración con APIs y base de datos
+│   │   ├── cacheService.ts
+│   │   ├── swapiService.ts
+│   │   ├── weatherService.ts
 │   ├── utils/              # Respuestas HTTP y utilidades
+│   │   ├── dependencyInjector.ts
+│   │   ├── response.ts
 │
 ├── tests/                  # Pruebas unitarias
-├── serverless.ts           # Configuración de Serverless Framework
-├── tsconfig.json           # Configuración TypeScript
+│   ├── fusionHandler.test.ts
+│   ├── historyHandler.test.ts
+│   ├── storeHandler.test.ts
+├── .gitignore              # Archivos y carpetas a ignorar por Git
 ├── package.json            # Configuración de dependencias y scripts
+├── serverless.yml          # Configuración de Serverless Framework
+├── tsconfig.json           # Configuración TypeScript
 └── README.md               # Documentación del proyecto
 ```
 
