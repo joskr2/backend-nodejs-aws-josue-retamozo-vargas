@@ -12,19 +12,19 @@ provider:
 
 functions:
   fusion:
-    handler: src/handlers/getFusioned.getFusioned
+    handler: src/controllers/fusionController.getFusioned
     events:
       - http:
           path: fusionados
           method: get
   store:
-    handler: src/handlers/storeHandler.postData
+    handler: src/controllers/storeController.postData
     events:
       - http:
           path: almacenar
           method: post
   history:
-    handler: src/handlers/historyHandler.getHistory
+    handler: src/controllers/historyController.getHistory
     events:
       - http:
           path: historial

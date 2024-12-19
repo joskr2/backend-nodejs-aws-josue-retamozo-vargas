@@ -1,4 +1,4 @@
-import { postData } from "../handlers/storeHandler";
+import { postData } from "../controllers/storeController";
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
 
@@ -52,5 +52,21 @@ describe("POST /almacenar", () => {
     expect(result.statusCode).toBe(500);
     const body = JSON.parse(result.body);
     expect(body.message).toBe("Failed to store data");
+  });
+
+  test("Debe retornar statusCode 400 si el cuerpo de la solicitud es inválido", async () => {
+    const invalidEvent: Partial<APIGatewayEvent> = {
+      body: JSON.stringify({}),
+    };
+
+    const result = (await postData(
+      invalidEvent as APIGatewayEvent,
+      mockContext as Context,
+      () => {}
+    )) as APIGatewayProxyResult;
+
+    expect(result.statusCode).toBe(400);
+    const body = JSON.parse(result.body);
+    expect(body.message).toBe("Invalid request, 'id' and 'data' are required");
   });
 });

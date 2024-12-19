@@ -1,14 +1,17 @@
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from "aws-lambda";
-import { getWeather } from "../services/weatherService";
-import { getPeople } from "../services/swapiService";
+import {
+  swapiService,
+  weatherService,
+} from "../utils/dependencyInjector";
+import { successResponse, errorResponse } from "../utils/response";
 
 export const getFusioned = async (
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const weatherData = await getWeather("Arequipa");
-    const peopleData = await getPeople();
+    const weatherData = await weatherService.getWeather("Arequipa");
+    const peopleData = await swapiService.getPeople();
 
     const weatherDataToCelcius = weatherData?.temperature - 273.15;
     const data = {
@@ -16,17 +19,9 @@ export const getFusioned = async (
       temperature: `${weatherDataToCelcius.toFixed(2) || 0}°C`,
     };
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify(data),
-    };
+    return successResponse(data);
   } catch (error) {
     console.error("Error al obtener datos fusionados", error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: "Error interno del servidor" }),
-    };
+    return errorResponse("Error interno del servidor");
   }
 };
-
-module.exports = { getFusioned };

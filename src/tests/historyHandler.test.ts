@@ -1,4 +1,4 @@
-import { getHistory } from "../handlers/historyHandler";
+import { getHistory } from "../controllers/historyController";
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
 

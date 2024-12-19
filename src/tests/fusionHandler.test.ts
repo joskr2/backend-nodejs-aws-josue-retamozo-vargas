@@ -1,20 +1,19 @@
-
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from "aws-lambda";
 import * as weatherService from "../services/weatherService";
 import * as swapiService from "../services/swapiService";
-import { getFusioned } from "../handlers/getFusioned";
+import { getFusioned } from "../controllers/fusionController";
 
 describe("GET /fusionados", () => {
   const mockEvent: Partial<APIGatewayEvent> = {};
   const mockContext: Partial<Context> = {};
 
   beforeAll(() => {
-    jest.spyOn(weatherService, "getWeather").mockResolvedValue({
+    (jest.spyOn(weatherService as any, "getWeather") as jest.Mock).mockResolvedValue({
       temperature: 25,
       weather: "clear sky",
     });
-
-    jest.spyOn(swapiService, "getPeople").mockResolvedValue({
+    
+    (jest.spyOn(swapiService as any, "getPeople") as jest.Mock).mockResolvedValue({
       name: "Luke Skywalker",
       height: "172",
     });
@@ -40,7 +39,7 @@ describe("GET /fusionados", () => {
   test("Debe manejar errores correctamente", async () => {
     jest.spyOn(console, "error").mockImplementation(() => {});
     jest
-      .spyOn(weatherService, "getWeather")
+      .spyOn(weatherService as any, "getWeather")
       .mockRejectedValue(new Error("Error simulado"));
 
     const result = (await getFusioned(

@@ -1,33 +1,29 @@
 import { DynamoDB } from "aws-sdk";
 
-const db = new DynamoDB.DocumentClient();
+export class CacheService {
+  private db: DynamoDB.DocumentClient;
+  private tableName: string;
 
-const getCache = async (key: string) => {
-  try {
-    const result = await db
-      .get({ TableName: process.env.TABLE_NAME!, Key: { id: key } })
+  constructor(db: DynamoDB.DocumentClient) {
+    this.db = db;
+    this.tableName = process.env.TABLE_NAME!;
+  }
+
+  async getCache(key: string) {
+    const result = await this.db
+      .get({ TableName: this.tableName, Key: { id: key } })
       .promise();
     if (!result.Item) return null;
     const isValid = Date.now() - result.Item.timestamp < 30 * 60 * 1000;
     return isValid ? result.Item.data : null;
-  } catch (error) {
-    console.error("Error fetching cache data:", error);
-    throw new Error("Failed to fetch cache data");
   }
-};
 
-const setCache = async (key: string, data: any) => {
-  try {
-    await db
+  async setCache(key: string, data: any) {
+    await this.db
       .put({
-        TableName: process.env.TABLE_NAME!,
+        TableName: this.tableName,
         Item: { id: key, data, timestamp: Date.now() },
       })
       .promise();
-  } catch (error) {
-    console.error("Error setting cache data:", error);
-    throw new Error("Failed to set cache data");
   }
-};
-
-export { getCache, setCache };
+}
